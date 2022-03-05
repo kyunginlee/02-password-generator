@@ -23,6 +23,7 @@
 const resultDOM = document.getElementById("result");
 const copybtnDOM = document.getElementById("copy");
 const lengthDOM = document.getElementById("length");
+const lowercaseDOM = document.getElementById("lowercase");
 const uppercaseDOM = document.getElementById("uppercase");
 const numbersDOM = document.getElementById("numbers");
 const symbolsDOM = document.getElementById("symbols");
@@ -49,15 +50,16 @@ function arrayFromLowToHigh(low, high) {
 // WHEN all prompts are answered
 // THEN a password is generated that matches the selected criteria
 // The Password Generating Function
-//UX preference: Would remove includeLowercase as this would be a default inclusion
 let generatePassword = (
     characterAmount,
+    includeLowercase,
     includeUppercase,
     includeNumbers,
     includeSymbols
   ) => {
     //  UX preference: would include the line-> let charCodes = LOWERCASE_CODES; to make lowecase default inclusion and remove the first line below
     let charCodes = LOWERCASE_CODES;
+    if (includeLowercase) charCodes = charCodes.concat(LOWERCASE_CODES);
     if (includeUppercase) charCodes = charCodes.concat(UPPERCASE_CODES);
     if (includeSymbols) charCodes = charCodes.concat(SYMBOL_CODES);
     if (includeNumbers) charCodes = charCodes.concat(NUMBER_CODES);
@@ -94,15 +96,21 @@ copybtnDOM.addEventListener("click", () => {
   // Checking the options that are selected and setting the password
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const characterAmount = lengthDOM.value;
-    const includeUppercase = uppercaseDOM.checked;
-    const includeNumbers = numbersDOM.checked;
-    const includeSymbols = symbolsDOM.checked;
-    const password = generatePassword(
-      characterAmount,
-      includeUppercase,
-      includeNumbers,
-      includeSymbols
-    );
-    resultDOM.innerText = password;
-  });
+    console.log(uppercaseDOM.checked)
+    if( !lowercaseDOM.checked && !uppercaseDOM.checked && !numbersDOM.checked && !symbolsDOM.checked){
+        alert("Please specify at least 1 character type")
+    }else{
+        const characterAmount = lengthDOM.value;
+        const includeLowercase = lowercaseDOM.checked;
+        const includeUppercase = uppercaseDOM.checked;
+        const includeNumbers = numbersDOM.checked;
+        const includeSymbols = symbolsDOM.checked;
+        const password = generatePassword(
+            characterAmount,
+            includeLowercase,
+            includeUppercase,
+            includeNumbers,
+            includeSymbols
+        );
+        resultDOM.innerText = password;
+}});
