@@ -58,21 +58,51 @@ let generatePassword = (
     includeSymbols
   ) => {
     //  UX preference: would include the line-> let charCodes = LOWERCASE_CODES; to make lowecase default inclusion and remove the first line below
-    let charCodes = LOWERCASE_CODES;
-    if (includeLowercase) charCodes = charCodes.concat(LOWERCASE_CODES);
-    if (includeUppercase) charCodes = charCodes.concat(UPPERCASE_CODES);
-    if (includeSymbols) charCodes = charCodes.concat(SYMBOL_CODES);
-    if (includeNumbers) charCodes = charCodes.concat(NUMBER_CODES);
+    // let charCodes = LOWERCASE_CODES;
+    // if (includeLowercase) charCodes = charCodes.concat(LOWERCASE_CODES);
+    // if (includeUppercase) charCodes = charCodes.concat(UPPERCASE_CODES);
+    // if (includeSymbols) charCodes = charCodes.concat(SYMBOL_CODES);
+    // if (includeNumbers) charCodes = charCodes.concat(NUMBER_CODES);
 
     const passwordCharacters = [];
-    for (let i = 0; i < characterAmount; i++) {
-      const characterCode =
-        charCodes[Math.floor(Math.random() * charCodes.length)];
-      passwordCharacters.push(String.fromCharCode(characterCode));
+    while(passwordCharacters.length < characterAmount) { 
+
+        if (includeLowercase){
+            const characterCode = LOWERCASE_CODES[Math.floor(Math.random() * LOWERCASE_CODES.length)];
+            passwordCharacters.push(String.fromCharCode(characterCode));
+            if(passwordCharacters.length === characterAmount){
+                break
+            }
+        }
+        if (includeUppercase) {
+            const characterCode = UPPERCASE_CODES[Math.floor(Math.random() * UPPERCASE_CODES.length)];
+            passwordCharacters.push(String.fromCharCode(characterCode));
+            if(passwordCharacters.length === characterAmount){
+                break
+            }
+        }
+        if (includeNumbers) {
+            const characterCode = NUMBER_CODES[Math.floor(Math.random() * NUMBER_CODES.length)];
+            passwordCharacters.push(String.fromCharCode(characterCode));
+            if(passwordCharacters.length === characterAmount){
+                break
+            }
+        }
+        if (includeSymbols) {
+            const characterCode = SYMBOL_CODES[Math.floor(Math.random() * SYMBOL_CODES.length)];
+            passwordCharacters.push(String.fromCharCode(characterCode));
+            if(passwordCharacters.length === characterAmount){
+                break
+            }
+        }
     }
+    // for (let i = 0; i < characterAmount; i++) {
+    //   const characterCode =
+    //     charCodes[Math.floor(Math.random() * charCodes.length)];
+    //   passwordCharacters.push(String.fromCharCode(characterCode));
+    // }
     return passwordCharacters.join("");
 }
-
 
 // WHEN the password is generated
 // THEN the password is either displayed in an alert or written to the page
