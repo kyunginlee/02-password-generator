@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Password Generator</h1>
+    </header>
+    <form id="password-generator">
+        <div class="container">
+            <h2>Generate a Password</h2>
+            <div class="result_container">
+            <span id="result"></span>
+            <button id="copy">Copy</button>
+            </div>
+            <div class="options">
+                <div class="option">
+                  <label>Length</label>
+                  <!-- UX preference: set value to 8 to match minimum however looking to trigger promt for excercise -->
+                  <input type="number" id="length" min="8" max="128" value="0">
+            </div>
+
+                <!--UX preference: Would leave all boxes checked i(as default) instead of unchecked, however have left them unchecked to lead to prompt trigger when left unchecked-->
+
+                <div class="option">
+                  <label>Include Uppercase</label>
+                  <input type="checkbox" id="uppercase" unchecked>
+                </div>
+                <div class="option">
+                  <label>Include Numbers</label>
+                  <input type="checkbox" id="numbers" unchecked>
+                </div>
+                <div class="option">
+                  <label>Include Symbols</label>
+                  <input type="checkbox" id="symbols" unchecked>
+                </div>
+              </div>
+            <section>
+                <button class="btn" id="generate" onclick="function()">Generate Password</button>
+            </section>
+        </div>
+    </form>
+  <script src="./script.js"></script>
+</body>
+</html>
